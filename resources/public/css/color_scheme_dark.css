@@ -1,0 +1,95 @@
+/*------------------------------------------------------------------
+[Stylesheet]
+Color Scheme - Dark
+-------------------------------------------------------------------*/
+
+.hero_fullscreen,
+nav a,
+.subsection,
+#message,
+.cta_button_area a,
+.color_bg {
+	color:white;
+}
+
+
+.subsection.darker_bg {
+	background-color: #262626;
+}
+
+.hero_fullscreen,
+.preloader_header,
+.subsection,
+.nivo-lightbox-theme-default.nivo-lightbox-overlay  {
+	background-color: #212121;	
+}
+
+.preloader_header .preloader_loader svg path.preloader_loader_circlebg {
+    stroke: rgba(255, 255, 255, .1);
+}
+
+.preloader_header .preloader_loader svg path.preloader_loader_circle {
+    transition: stroke-dashoffset 0.2s;
+    stroke: rgba(255, 255, 255, .95);
+}
+
+.contact_form .input-field label,
+.menu_bar_navigation ul li a{
+	color:white;
+}
+
+.input-field label {
+	color:white;
+}
+
+.newsletter_form input[type=text],
+.newsletter_form input[type=password],
+.newsletter_form input[type=email],
+.newsletter_form input[type=date],
+.newsletter_form textarea, 
+.contact_form input[type=text],
+.contact_form input[type=password],
+.contact_form input[type=email],
+.contact_form input[type=date],
+.contact_form textarea {
+	border-bottom: 1px solid rgba(255, 255, 255, .7);
+}
+
+.countdown_part {
+	border-right: 1px solid rgba(255, 255, 255, .7);
+}
+
+.menu_bar {
+	background-color:#424242;
+}
+
+.logo_dark {
+	display:none;
+}
+
+.logo_light {
+	display:block;
+}
+
+.iconbox_icon {
+    color: rgba(255,255,255,0.5)
+}
+
+.nivo-lightbox-theme-default .nivo-lightbox-close,
+.nivo-lightbox-theme-default .nivo-lightbox-nav {
+	color:white
+}
+
+#reviews .owl-theme .owl-controls .owl-page span {border-color:white !important; background: rgba(255,255,255,0)}
+#reviews .owl-theme .owl-controls .owl-page.active span,
+#reviews .owl-theme .owl-controls.clickable .owl-page:hover span {
+	background: rgba(255,255,255,1);
+	border-color:white !important
+}
+
+#screenshots_gallery .owl-theme .owl-controls .owl-page span {border-color:white !important; background: rgba(255,255,255,0)}
+#screenshots_gallery .owl-theme .owl-controls .owl-page.active span,
+#screenshots_gallery .owl-theme .owl-controls.clickable .owl-page:hover span {
+	background: rgba(255,255,255,1);
+	border-color:white !important
+}

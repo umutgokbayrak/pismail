@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<section class="mailbox-section col-xs-offset-1">
+    <h2 class="col-xs-11">Mailbox for "{{ mbox }}" </h2>
+
+    {% if msgs|count-is:0 %}
+    <div class="mailbox-row row col-xs-11 mailbox-row-{% cycle even odd %}">
+        <div class="col-xs-11">
+            No messages in this mailbox
+        </div>
+    </div>
+    {% endif %}
+
+
+    {% for msg in msgs %}
+    <div class="mailbox-row row col-xs-11 mailbox-row-{% cycle even odd %}">
+        <a href="/mail?mbox={{mbox}}&m={{forloop.counter0}}">
+            <div class="mailbox-to col-xs-5">
+                {{ msg.from }}
+            </div>
+            <div  class="mailbox-subject col-xs-6">
+                {{ msg.subject }}
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+</section>
+
+{% endblock %}

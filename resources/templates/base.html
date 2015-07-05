@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pismail - User friendly disposable e-mail service</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+        <!-- Included Google Fonts -->
+        <link href='http://fonts.googleapis.com/css?family=Roboto:400,900,700,500,300,100' rel='stylesheet' type='text/css'>
+
+        <!-- CSS Files comes here -->
+        <link href="css/grid12.css" rel="stylesheet" media="screen">                              	 <!-- Grid System -->
+        <link href="css/james_typography.css" rel="stylesheet" media="screen">                       <!-- James Framework - TYPOGRAPHY -->
+        <link href="css/main.css" rel="stylesheet" media="screen">                                   <!-- Main CSS file -->
+        <link href="css/color_scheme_light.css" rel="stylesheet" media="screen">                     <!-- Color scheme (dark/light)-->
+        <link href="css/colors/color_palette_indigo.css" rel="stylesheet" media="screen">            <!-- Color palette -->
+        <link href="css/responsivity.css" rel="stylesheet" media="screen">                           <!-- Responsive Fixes -->
+
+        <!-- Modernizer and IE specyfic files -->
+        <script src="js/modernizr.custom.js"></script>
+
+        <!-- script src="//code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script -->
+
+        {% block page-scripts %}
+        {% endblock %}
+    </head>
+
+    <body>
+		<section class="hero_fullscreen background_solid navbar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 outher">
+                        <a href="/"><img src="images/logo.png" alt="logo" class="logo inner"/></a>
+                        <div class="inner float-right contact"><p><a href="/logout">Logout</a></p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container-fluid base-content">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </body>
+</html>
