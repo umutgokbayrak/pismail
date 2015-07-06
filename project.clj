@@ -14,7 +14,7 @@
                  [ring/ring-session-timeout "0.1.0"]
                  [ring "1.4.0-RC2" :exclusions [ring/ring-jetty-adapter]]
                  [ring-server "0.4.0"]
-                 [cc.qbits/jet "0.6.5"]
+                 [cc.qbits/jet "0.6.4"]
                  [metosin/ring-middleware-format "0.6.0"]
                  [metosin/ring-http-response "0.6.2"]
                  [bouncer "0.3.3"]
