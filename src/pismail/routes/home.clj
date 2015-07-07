@@ -32,26 +32,44 @@
 
 
 (defn- append-script [msg]
-
   (str
    "<script> window.onload = function() { var height = document.body.scrollWidth); window.parent.document.getElementById('mail-icontent').style.height = height; } </script>"
    msg))
 
 
 (defn mail-content [mbox m]
-  (let [msgs (read-msgs mbox)
-        body (:body (nth msgs (Integer. m)))]
-    (if-let [html-msg (filter #(.startsWith (:content-type %) "text/html") body)]
-      (append-script (:body (first html-msg)))
-      (if-let [plain-msg (filter #(.startsWith (:content-type %) "text/plain") body)]
-        (append-script (:body (first plain-msg)))
-        (if-let [wtf-msg (clojure.string/replace (second (second body)) #"\\\"" "\"")]
-          (append-script wtf-msg)
-          "Unable to parse message")))))
+  (try
+    (let [msgs (read-msgs mbox)
+          body (:body (nth msgs (Integer. m)))]
+      (if-let [html-msg (filter #(if-let [content (:content-type %)]
+                                   (.startsWith content "text/html"))
+                                body)]
+        (append-script (:body (first html-msg))))
+      (if-let [plain-msg (filter #(if-let [content (:content-type %)]
+                                    (.startsWith content "text/plain"))
+                                 body)]
+        (append-script (:body (first plain-msg))))
+      (if-let [wtf-msg (clojure.string/replace (second (second body)) #"\\\"" "\"")]
+        (append-script wtf-msg)
+        (do
+          (if-let [html-msg (filter #(if-let [content (:content-type %)]
+                                       (.startsWith content "text/html"))
+                                    (first body))]
+            (append-script (:body (first html-msg))))
+          (if-let [plain-msg (filter #(if-let [content (:content-type %)]
+                                        (.startsWith content "text/plain"))
+                                     (first body))]
+            (append-script (:body (first plain-msg))))
+          (if-let [wtf-msg (clojure.string/replace (second (second (first body))) #"\\\"" "\"")]
+            (append-script wtf-msg)
+            "Unable to get message. Message may be deleted or invalid."))))
+    (catch Exception e (.printStackTrace e))))
+
 
 (defn logout []
-  "Logged out")
+  (ring.util.response/redirect "/"))
 
+(mail-content "teroti" 0)
 
 (defroutes home-routes
   (GET "/" [] (home-page))
