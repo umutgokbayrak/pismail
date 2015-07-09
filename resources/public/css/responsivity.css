@@ -28,15 +28,15 @@ Responsiveness Fixes
   }
 
   input.hero-textbox {
-    font-size: 14px;
-    width: 35%;
+    font-size: 24px;
+    width: 30%;
     line-height: 18px;
-    height: 18px;
+    height: 36px;
   }
 
   span.hero-tip {
-    font-size: 14px;
-    width: 35%;
+    font-size: 24px;
+    width: 40%;
   }
 
   button.check-it {

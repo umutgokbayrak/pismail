@@ -65,6 +65,6 @@
 (def app
   (-> (routes
        (wrap-routes #'home-routes middleware/wrap-csrf)
-       #'api-routes
+       (wrap-routes #'api-routes middleware/wrap-api-auth)
        #'base-routes)
       middleware/wrap-base))

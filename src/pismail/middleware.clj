@@ -47,6 +47,15 @@
 (defn wrap-formats [handler]
   (wrap-restful-format handler :formats [:json-kw :transit-json :transit-msgpack]))
 
+
+(defn wrap-api-auth [handler]
+  (fn [request]
+     (let [api-key (get (:headers request) "pismail-key")]
+       (if (not (= api-key "5d9902e2261ce232afe2aa300f8164a8"))
+         {:body {:return {:code 3 :err "Unauthorized"}}}
+         (handler request)))))
+
+
 (defn wrap-base [handler]
   (-> handler
       wrap-dev
