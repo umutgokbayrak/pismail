@@ -38,8 +38,10 @@
     (timbre/info "initiating mail expunge loop")
     (mail-expunge/init)
 
-    (timbre/info "initiating db expire loop")
-    (db-expire/init)
+    (if (not (env :dev))
+      (do
+        (timbre/info "initiating db expire loop")
+        (db-expire/init)))
 
     (.addShutdownHook (Runtime/getRuntime) (Thread. stop-server))
     (timbre/info "server is starting on port " port)

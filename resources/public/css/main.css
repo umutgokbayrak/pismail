@@ -863,12 +863,6 @@ div.mailbox-row, div.mail-row {
   border-left: 3px solid #fff;
 }
 
-/*
-div.mailbox-row:hover {
-  border-left: 3px solid #f44336;
-  background-color: #fefefe;
-}
-*/
 
 div.mailbox-row-even {
   background-color: #fff;
@@ -906,3 +900,9 @@ div.mail-content iframe {
   font-weight: 400;
 }
 
+p strong.error {
+  display: inline-block;
+  font-weight: 450px;
+  color: #f44336;
+  margin-top: 30px;
+}

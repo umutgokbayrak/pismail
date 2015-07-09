@@ -3,20 +3,82 @@
 Responsiveness Fixes
 -------------------------------------------------------------------*/
 
-@media (max-width: 479px) {	
+@media (max-width: 479px) {
 	.content_container h2 {
 		font-size: 2rem;
 		line-height:2rem;
 	}
-		
+
 	.container {
 		padding-left: 0;
 		padding-right: 0;
 	}
-	
+
 	.top_bar p {margin-top:0.5rem;}
 	.iconbox {margin-bottom:4rem;}
-	
+
+
+  div.mailbox-container {
+    height: 104px;
+    width: 100%;
+  }
+
+  div.mailbox-container div.mailbox-container-inner {
+    padding-top: 5px;
+  }
+
+  input.hero-textbox {
+    font-size: 14px;
+    width: 35%;
+    line-height: 18px;
+    height: 18px;
+  }
+
+  span.hero-tip {
+    font-size: 14px;
+    width: 35%;
+  }
+
+  button.check-it {
+    width: 100%;
+    font-size: 10px;
+    margin-top: 10px;
+    border-radius: 0px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+
+  section.mailbox-section h2, section.mail-section h2 {
+    font-size: 18px;
+    font-weight: 450;
+    margin-top: -10px;
+  }
+
+  div.mailbox-row, div.mail-row {
+    font-size: 14px;
+    padding: 8px 0px;
+    line-height: 28px;
+  }
+
+  div.mailbox-to {
+    width: 100%;
+    font-weight: 400;
+  }
+
+  div.mailbox-subject {
+    width: 100%;
+  }
+
+  div.mailbox-row {
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .mail-subject {
+    font-size: 14px;
+    padding-bottom: 10px;
+    font-weight: 350;
+  }
+
 }
 
 @media (min-width: 480px) and (max-width: 767px) {
@@ -24,7 +86,6 @@ Responsiveness Fixes
 		margin-top:0.5rem;
 	}
 	.iconbox {margin-bottom:4rem;}
-	
 }
 
 

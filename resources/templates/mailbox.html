@@ -3,7 +3,13 @@
 
 
 <section class="mailbox-section col-xs-offset-1">
-    <h2 class="col-xs-11">Mailbox for "{{ mbox }}" </h2>
+    <h2 class="mailbox-header col-xs-11">Mailbox for "{{ mbox }}" </h2>
+
+    {{ err }}
+
+    {% ifequal err "1" %}
+    <p><strong class="error">This message was expunged automatically. It exists no more.</strong></p>
+    {% endifequal %}
 
     {% if msgs|count-is:0 %}
     <div class="mailbox-row row col-xs-11 mailbox-row-{% cycle even odd %}">
