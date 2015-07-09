@@ -3,7 +3,8 @@
             [clojure.data.json :as json]
             [taoensso.carmine :as car :refer (wcar)])
   (:import  [javax.mail.internet MimeUtility InternetAddress]
-            [java.util Date]))
+            [java.util Date]
+            [java.text SimpleDateFormat]))
 
 (def server1-conn {:pool {} :spec {:host "127.0.0.1" :port 6379}})
 (defmacro wcar* [& body] `(car/wcar server1-conn ~@body))
@@ -19,12 +20,21 @@
   (try
     (let [addr (InternetAddress. (:to msg))
           mailbox (first (clojure.string/split (.getAddress addr) #"@"))
-          json-str (json/write-str msg)]
+          json-str (json/write-str msg)
+          date (new Date)
+          today (.format (SimpleDateFormat. "yyyy-MM-dd") date)
+          this-week (.format (SimpleDateFormat. "yyyy-w") date)
+          this-month (.format (SimpleDateFormat. "yyyy-MM") date)
+          this-year (.format (SimpleDateFormat. "yyyy") date)]
 
-      ;; istatistikleri update et. gunde kac mail geldi
       ;; ip adreslerini sakla ve yasal sebeplerle log at.
 
-      (wcar* (car/hset (str "mbox-" mailbox) (.getTime (new Date)) json-str)))
+      (wcar* (car/hset (str "mbox-" mailbox) (.getTime date) json-str)
+             (car/incr "stats-all")
+             (car/hincrby "stats-day" today 1)
+             (car/hincrby "stats-week" this-week 1)
+             (car/hincrby "stats-month" this-month 1)
+             (car/hincrby "stats-year" this-year 1)))
     (catch Exception e
       (.printStackTrace e))))
 
