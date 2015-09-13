@@ -10,9 +10,11 @@
 (defn mailbox-api [mbox]
   (if (not (clojure.string/blank? mbox))
     (let [msgs (read-msgs mbox)]
-      {:body {:msgs (map-indexed (fn [idx itm] {idx itm})
-                                 (map #(apply dissoc % [:to :date-recieved :multipart? :content-type :body])
-                         msgs))
+      {:body {:msgs
+              (map-indexed
+               (fn [idx itm] {idx itm})
+               (map #(apply dissoc % [:to :date-recieved :multipart? :content-type :body])
+                    msgs))
               :return {:code 0}}})
     {:body {:msgs nil
             :return {:code 1
@@ -29,9 +31,12 @@
             msg  (nth msgs (Integer. m))
             body (util/mail-parser (nth msgs (Integer. m)))]
       (response body))
-      (catch Exception e {:body {:msg nil
-                                 :return {:code 2
-                                          :err "This message was expunged automatically. It exists no more."}}}))))
+      (catch Exception e
+        {:body
+         {:msg nil
+          :return
+          {:code 2
+           :err "This message was expunged automatically. It exists no more."}}}))))
 
 (defn config-api []
   {:body {:minVersion 1

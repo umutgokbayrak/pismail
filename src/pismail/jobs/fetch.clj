@@ -7,7 +7,7 @@
   (future
     (while true
      (try
-       ; (timbre/info "fetching messages")
+;       (timbre/info "fetching messages")
 
        (let [messages (fetch-unread)]
          (if (> (count messages) 0)
@@ -20,7 +20,7 @@
                  (save-msg msg)
                  (catch Exception f
                    (.printStackTrace f)))))
-           ;(timbre/info (count messages) "msgs. Pass...")))
+;           (timbre/info (count messages) "msgs. Pass...")
            ))
        ; sleep for a while
        (Thread/sleep 3000)
@@ -29,3 +29,5 @@
 
 
 ; (init)
+
+

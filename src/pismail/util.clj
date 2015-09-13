@@ -5,14 +5,28 @@
                     (.startsWith content "text/html"))
                  body))))
 
+
 (defn- plain-part [body]
-  (:body (first (filter #(if-let [content (:content-type %)]
-                    (.startsWith content "text/plain"))
-                 body))))
+  (let [body
+        (:body
+         (first
+          (filter
+           #(if-let [content (:content-type %)]
+              (.startsWith content "text/plain"))
+           body)))]
+    (clojure.string/replace body #"\n" "<br>")))
 
 
 (defn- single-part [body]
-  (:body (first body)))
+  (let [body (first body)
+        txt (:body body)]
+    (if-let [content-type (:content-type body)]
+      (do
+        (println content-type)
+        (if (.startsWith content-type "text/plain")
+          (clojure.string/replace txt #"\n" "<br>")
+          txt))
+      txt)))
 
 
 (defn- html-message? [body]
@@ -24,7 +38,8 @@
 
 
 (defn- wtf-part [body]
-  (nth body 3))
+  (println "wtf-part" body)
+  (clojure.string/replace (nth body 3) #"\n" "<br>"))
 
 
 (defn mail-parser [msg]
@@ -37,4 +52,5 @@
             (html-part body)
             (plain-part body))
           (single-part body))))
-    (catch Exception e (str "Unable to get message. Message may be deleted or invalid."))))
+    (catch Exception e
+      (str "Unable to get message. Message may be deleted or invalid."))))

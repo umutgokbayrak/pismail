@@ -114,8 +114,7 @@
 (defn message-parts
   [^javax.mail.internet.MimeMultipart msg]
   (when (multipart? msg)
-    (read-multi
-      (get-content msg))))
+    (read-multi (get-content msg))))
 
 (defn msg->map
   "Convert a mail message body into a Clojure map
@@ -133,7 +132,10 @@
     {:content-type \"TEXT\\HTML\"  :body \"Bar\"}]"
   [msg]
   (if (multipart? msg)
-    (message-parts msg)
+    (filter (fn [part]
+              (let [content-type (:content-type part)]
+                (and (some? content-type) (.startsWith content-type "text"))))
+            (message-parts msg))
     (msg->map msg)))
 
 ;; Public API for working with messages
@@ -163,10 +165,11 @@
    as a clojure map"
   (try
     (let [body (message-body msg)
-          filtered-body (filter #(if (not (:multipart? msg))
-                                   true
-                                   (if-let [content-type (:content-type %)]
-                                     (.startsWith content-type "text"))) body)]
+          filtered-body (filter
+                         #(if (not (:multipart? msg))
+                            true
+                            (if-let [content-type (:content-type %)]
+                              (.startsWith content-type "text"))) body)]
       {:to (safe-get-empty (MimeUtility/decodeText (safe-get (first (to msg)))))
        :from (safe-get (.getAddress (sender msg)))
        :subject (safe-get-empty (MimeUtility/decodeText (safe-get (subject msg))))
