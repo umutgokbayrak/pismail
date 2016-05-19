@@ -12,9 +12,9 @@
 
 
 (def protocol "imap")
-(def server "claros.org")
-(def username "pismail")
-(def password "hebelek667qz")
+(def server "CHANGEME")
+(def username "CHANGEME")
+(def password "CHANGEME")
 
 
 (def imap-folder-names
